@@ -12,6 +12,8 @@ contract TodoList {
         bool completed;
     }
 
+    event TaskCreated(uint id, string content, bool completed);
+
     //to initialize a default task to the todolist when the contract run for the first time
     constructor() public {
         createTask("This is the deafult task");
@@ -21,5 +23,6 @@ contract TodoList {
     function createTask(string memory _content) public {
         taskCount++; //to increment the above state variable by one
         tasks[taskCount] = Task(taskCount, _content, false);
+        emit TaskCreated(taskCount, _content, false);
     }
 }
